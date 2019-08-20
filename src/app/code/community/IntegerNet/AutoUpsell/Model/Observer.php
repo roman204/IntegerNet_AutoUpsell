@@ -33,10 +33,11 @@ class IntegerNet_AutoUpsell_Model_Observer
     {
         /** @var Mage_Catalog_Model_Resource_Product_Collection $productsToAdd */
         $productsToAdd = $this->_getProductCategory($product)->getProductCollection();
+        $excludeIds = array_merge([$product->getId()], $collection->getAllIds());
         $productsToAdd
             ->addStoreFilter()
             ->addAttributeToFilter('price', array('gteq' => $product->getData('price')))
-            ->addIdFilter([$product->getId()] + $collection->getAllIds(), true)
+            ->addIdFilter($excludeIds, true)
             ->setVisibility(Mage::getSingleton('catalog/product_visibility')->getVisibleInCatalogIds());
         /*
          * To pick random products we don't ORDER BY RAND() because it results in a resource intensive table scan.
