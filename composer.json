@@ -21,5 +21,5 @@
     ],
     "suggest": {
         "magento-hackathon/magento-composer-installer": "*"
-    },
+    }
 }
